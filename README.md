@@ -15,9 +15,10 @@ mechanism.
 
 ## Usage
 
-Clone the repository, mount it's directory into the official Docker image as a volume
-and declare database names separated by commas in `POSTGRES_MULTIPLE_DATABASES`
-environment variable as follows (`docker-compose` syntax):
+Clone the repository, mount its directory as a volume into
+`/docker-entrypoint-initdb.d` and declare database names separated by commas in
+`POSTGRES_MULTIPLE_DATABASES` environment variable as follows
+(`docker-compose` syntax):
 
     myapp-postgresql:
         image: postgres:9.6.2
