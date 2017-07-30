@@ -15,8 +15,8 @@ mechanism.
 
 ## Usage
 
-Clone the repository, mount it's directory into the official Docker image and
-declare database names separated by commas in `POSTGRES_MULTIPLE_DATABASES`
+Clone the repository, mount it's directory into the official Docker image as a volume
+and declare database names separated by commas in `POSTGRES_MULTIPLE_DATABASES`
 environment variable as follows (`docker-compose` syntax):
 
     myapp-postgresql:
