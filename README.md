@@ -25,7 +25,7 @@ Clone the repository, mount its directory as a volume into
     myapp-postgresql:
         image: postgres:9.6.2
         volumes:
-            - ../docker-posgresql-multiple-databases:/docker-entrypoint-initdb.d
+            - ../docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
         environment:
             - POSTGRES_MULTIPLE_DATABASES=db1,db2
             - POSTGRES_USER=myapp
