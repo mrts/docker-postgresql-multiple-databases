@@ -48,3 +48,10 @@ to the container:
             - POSTGRES_MULTIPLE_DATABASES=db1,db2
             - POSTGRES_USER=myapp
             - POSTGRES_PASSWORD=
+
+### Non-standard database names
+
+If you need to use non-standard database names (hyphens, uppercase letters etc), quote them in `POSTGRES_MULTIPLE_DATABASES`:
+
+        environment:
+            - POSTGRES_MULTIPLE_DATABASES="test-db-1","test-db-2"
