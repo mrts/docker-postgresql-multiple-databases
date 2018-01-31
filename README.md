@@ -55,3 +55,7 @@ If you need to use non-standard database names (hyphens, uppercase letters etc),
 
         environment:
             - POSTGRES_MULTIPLE_DATABASES="test-db-1","test-db-2"
+
+
+The `create-multiple-postgresql-full.sh` and `docker-compose.yml` shows an example of how to create both databases and users exclusively to them and assign passwords to them. 
+`user1` will not have access to `db1`,`db2`.
