@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: example-postgres
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES="db1","db2","db3"
+      - POSTGRES_MULTIPLE_USERS="user1","user2","user3
+      - POSTGRES_MULTIPLE_PASSWORDS="password1","password2","password3"
+      - POSTGRES_USER=superrole
+      - POSTGRES_PASSWORD=superpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./create-multiple-postgresql-full.sh:/docker-entrypoint-initdb.d/create-multiple-postgresql-full.sh
+    restart: always
