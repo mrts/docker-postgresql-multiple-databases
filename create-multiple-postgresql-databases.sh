@@ -10,7 +10,7 @@ function create_databases() {
 	echo "  Creating user and database '$database'"
 	psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
 	    CREATE DATABASE $database;
-	    GRANT ALL PRIVILEGES ON DATABASE $user TO $database;
+	    GRANT ALL PRIVILEGES ON DATABASE $database TO $user;
 EOSQL
 }
 
