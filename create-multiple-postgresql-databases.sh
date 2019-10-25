@@ -11,8 +11,6 @@ function create_user_and_database() {
 	    CREATE DATABASE $database;
 	    GRANT ALL PRIVILEGES ON DATABASE $database TO $database;
 EOSQL
-	echo  " Injecting Seed Data"
-	psql $database -q < ./empty-v973-1569955230.sql
 }
 
 if [ -n "$POSTGRES_MULTIPLE_DATABASES" ]; then
