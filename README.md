@@ -18,8 +18,7 @@ mechanism.
 ### By mounting a volume
 
 Clone the repository, mount its directory as a volume into
-`/docker-entrypoint-initdb.d` and declare database names separated by commas in
-`POSTGRES_MULTIPLE_DATABASES` environment variable as follows
+`/docker-entrypoint-initdb.d` and declare database names separated by commas and each entry with database, user and password separated by double colon in `POSTGRES_MULTIPLE_DATABASES` environment variable as follows
 (`docker-compose` syntax):
 
     myapp-postgresql:
@@ -27,9 +26,10 @@ Clone the repository, mount its directory as a volume into
         volumes:
             - ../docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
         environment:
-            - POSTGRES_MULTIPLE_DATABASES=db1,db2
+            - POSTGRES_MULTIPLE_DATABASES=db1:user:pwd,db2:user:pwd
             - POSTGRES_USER=myapp
             - POSTGRES_PASSWORD=
+            - POSTGRES_DB=db
 
 ### By building a custom image
 
@@ -48,10 +48,11 @@ to the container:
             - POSTGRES_MULTIPLE_DATABASES=db1,db2
             - POSTGRES_USER=myapp
             - POSTGRES_PASSWORD=
+            - POSTGRES_DB=db
 
 ### Non-standard database names
 
 If you need to use non-standard database names (hyphens, uppercase letters etc), quote them in `POSTGRES_MULTIPLE_DATABASES`:
 
         environment:
-            - POSTGRES_MULTIPLE_DATABASES="test-db-1","test-db-2"
+            - POSTGRES_MULTIPLE_DATABASES="test-db-1:user:pwd","test-db-2:user:pwd"
