@@ -27,7 +27,7 @@ Clone the repository, mount its directory as a volume into
         volumes:
             - ../docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
         environment:
-            - POSTGRES_MULTIPLE_DATABASES: db1,db2
+            - POSTGRES_MULTIPLE_DATABASES: db1:pwdb1,db2:pwddb2
             - POSTGRES_USER: myapp
             - POSTGRES_PASSWORD:
 
@@ -45,7 +45,7 @@ to the container:
     myapp-postgresql:
         image: eu.gcr.io/your-project/postgres-multi-db
         environment:
-            - POSTGRES_MULTIPLE_DATABASES: db1,db2
+            - POSTGRES_MULTIPLE_DATABASES: db1:pwdb1,db2:pwddb2
             - POSTGRES_USER: myapp
             - POSTGRES_PASSWORD:
 
@@ -54,4 +54,28 @@ to the container:
 If you need to use non-standard database names (hyphens, uppercase letters etc), quote them in `POSTGRES_MULTIPLE_DATABASES`:
 
         environment:
-            - POSTGRES_MULTIPLE_DATABASES: "test-db-1","test-db-2"
+            - POSTGRES_MULTIPLE_DATABASES: "test-db-1":"test-db-pw-1","test-db-2":"test-db-pw-2"
+
+## Add to docker composer as a service
+
+You can pass the `POSTGRES_MULTIPLE_DATABASES` environment variable
+to the docker composer like this:
+
+```yaml
+postgres:
+    image: postgres
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: your!!!Password
+      POSTGRES_MULTIPLE_DATABASES: db1:db1@Password, db2:db2@Password, db3:db3@Password
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./<path-of-the-entrypoint>/multiple-databases.sh:/docker-entrypoint-initdb.d/multiple-databases.sh
+```
